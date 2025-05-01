@@ -4,6 +4,7 @@ import {
   getAllBalloons,
   upsertBalloon,
 } from '../services/balloons.js';
+import { saveFileToUploadDir } from '../utils/saveFileToUploadDir.js';
 
 export const getAllBalloonsController = async (req, res) => {
   const data = await getAllBalloons();
@@ -16,7 +17,12 @@ export const getAllBalloonsController = async (req, res) => {
 };
 
 export const createBalloonController = async (req, res) => {
-  const data = await createBalloon(req.body);
+  let balloon;
+  if (req.file) {
+    balloon = await saveFileToUploadDir(req.file);
+  }
+
+  const data = await createBalloon({ ...req.body, balloon });
 
   res.status(201).json({
     status: 201,

@@ -4,7 +4,6 @@ const balloonSchema = new Schema(
   {
     balloon: {
       type: String,
-      required: true,
     },
     description: {
       type: String,
