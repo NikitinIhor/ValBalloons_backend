@@ -1,7 +1,6 @@
 import cookieParser from 'cookie-parser';
 import cors from 'cors';
 import express from 'express';
-import path from 'path';
 import pino from 'pino-http';
 import errorHandler from './middlewares/errorHandler.js';
 import notFoundHandler from './middlewares/notFoundHandler.js';
@@ -22,7 +21,7 @@ const startServer = () => {
   app.use(cors());
   app.use(express.json());
   app.use(cookieParser());
-  app.use('/uploads', express.static(path.join(process.cwd(), 'uploads')));
+  app.use(express.static('uploads'));
 
   app.use('/auth', authRouter);
   app.use('/balloons', balloonsRouter);

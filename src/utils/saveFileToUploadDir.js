@@ -9,5 +9,5 @@ export const saveFileToUploadDir = async file => {
 
   await fs.rename(oldPath, newPath);
 
-  return `/uploads/${file.filename}`;
+  return file.filename;
 };
